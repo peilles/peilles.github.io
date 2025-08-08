@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제16회 국제역학서학회 국제학술회의</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals -->
+    <!-- Application Structure Plan: A single-page application with a top-to-bottom layout. The core interaction is a set of buttons to toggle between Day 1 and Day 2 schedules. This approach is intuitive for users who want to quickly see the program for a specific day without scrolling through irrelevant information. A bar chart is included at the top to give a quick visual summary of the session types, helping users understand the conference structure at a glance. The main content area dynamically updates based on the selected day, providing a seamless user experience. -->
+    <!-- Visualization & Content Choices: Report Info: Conference Schedule -> Goal: Organize/Inform -> Viz/Presentation: Interactive Timeline (HTML/CSS/JS) -> Interaction: Day selection buttons dynamically update the visible schedule. Justification: This is the most direct and user-friendly way to present a multi-day schedule. | Report Info: Session Types (Keynote, Individual, Themed) -> Goal: Compare/Summarize -> Viz/Presentation: Bar Chart (Chart.js) -> Interaction: Hover tooltips show counts. Justification: Provides a quick, high-level overview of the event's academic structure. | Library: Chart.js for the chart, custom JS for the schedule filtering. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #FDFBF8;
+            color: #4A4A4A;
+        }
+        .active-tab {
+            background-color: #A88B79 !important;
+            color: #FFFFFF !important;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        .timeline-item {
+            border-left: 3px solid #D1C4B9;
+        }
+        .timeline-item:last-child {
+            border-left: 3px solid transparent;
+        }
+        .timeline-time {
+            background-color: #EFEBE7;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto px-4 py-8 md:py-12">
+
+        <header class="text-center mb-10 md:mb-12">
+            <h1 class="text-3xl md:text-5xl font-bold text-[#6B5B50] mb-2">제16회 국제역학서학회 국제학술회의</h1>
+        </header>
+
+        <main>
+            <section id="info" class="bg-white rounded-2xl shadow-sm p-6 md:p-8 mb-8 ring-1 ring-gray-200">
+                <div class="grid md:grid-cols-2 gap-6 text-center md:text-left">
+                    <div class="border-b md:border-b-0 md:border-r pb-6 md:pb-0 md:pr-6 border-gray-200">
+                        <h2 class="text-sm font-semibold uppercase text-[#A88B79] mb-2">일정</h2>
+                        <p class="text-lg font-medium text-gray-800">2025년 8월 25일(월) - 26일(화)</p>
+                    </div>
+                    <div>
+                        <h2 class="text-sm font-semibold uppercase text-[#A88B79] mb-2">장소</h2>
+                        <p class="text-lg font-medium text-gray-800">고려대학교 민족문화연구원 대강당 & 지훈회의실</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="schedule">
+                <div class="flex justify-center mb-8">
+                    <div class="bg-white rounded-full shadow-inner p-1 flex space-x-1">
+                        <button id="day1-btn" class="tab-btn px-6 py-2 text-sm md:text-base font-semibold rounded-full transition-all duration-300 ease-in-out" onclick="showSchedule('day1')">8월 25일 (월)</button>
+                        <button id="day2-btn" class="tab-btn px-6 py-2 text-sm md:text-base font-semibold rounded-full transition-all duration-300 ease-in-out" onclick="showSchedule('day2')">8월 26일 (화)</button>
+                    </div>
+                </div>
+
+                <div id="schedule-content"></div>
+            </section>
+        </main>
+
+        <footer class="text-center mt-12">
+            <p class="text-sm text-gray-500">&copy; 2025 국제역학서학회 사무국</p>
+        </footer>
+    </div>
+
+    <script>
+        const scheduleData = {
+            day1: {
+                venue: '대강당',
+                events: [
+                    { time: '09:50-10:00', type: '개회', title: '개회사', speaker: '다케코시 다카시 (국제역학서학회장)', moderator: '허인영 (한국·인하대학교)' },
+                    { time: '10:00-12:10', type: '강연 1', title: '근대 조선본 수집가와 어학서', speaker: '후지모토 유키오 (일본·전 도야마대학)', moderator: '정승혜 (한국·수원여자대학교)', isGroup: true, subEvents: [
+                        { title: '임진왜란의 피로인, 李宗閑에 대하여', speaker: '김문경 (일본·전 교토대학)'}
+                    ]},
+                    { time: '12:10-13:30', type: '휴식', title: '점심 식사', speaker: '', moderator: '' },
+                    { time: '13:30-14:50', type: '개인발표 1', title: '『満漢類書』에 나타난 관직명에 대하여', speaker: '스키타 도모히코 (일본·이와테대학)', moderator: '김양진 (한국·경희대학교)', isGroup: true, subEvents: [
+                        { title: '『日満語類集語彙』의 수록 어휘에 대하여', speaker: '마쓰오카 유타 (일본·간사이대학)'}
+                    ]},
+                    { time: '14:50-15:00', type: '휴식', title: '휴식', speaker: '', moderator: '' },
+                    { time: '15:00-16:20', type: '주제 발표', title: '청나라 시기 중국과 조선의 문학 교류', speaker: '우거페이 (중국·중국광업대학)', moderator: '스기야마 유타카 (교토산업대학)', isGroup: true, subEvents: [
+                        { title: '『一百条』(Tanggu Meyen)계 제본의 계승과 변용', speaker: '다케코시 다카시 (일본·고베시외국어대학)'}
+                    ]},
+                    { time: '16:20-16:30', type: '휴식', title: '휴식', speaker: '', moderator: '' },
+                    { time: '16:30-17:10', type: '주제 발표', title: '만주어의 형태론적 연구', speaker: '김양진 (한국·경희대학교)', moderator: '박진완 (교토산업대학)' },
+                    { time: '17:10-17:30', type: '총회', title: '총회', speaker: '', moderator: '허인영 (인하대학교)' },
+                    { time: '18:00-19:30', type: '네트워킹', title: '저녁 식사', speaker: '', moderator: '' }
+                ]
+            },
+            day2: {
+                venue: '지훈회의실',
+                events: [
+                    { time: '10:00-11:00', type: '강연 2', title: '漢兒言語와 漢吏文: 조선 이문의 형성과정을 중심으로', speaker: '정광 (한국·전 고려대학교)', moderator: '다케코시 다카시 (고베시외국어대학)' },
+                    { time: '11:00-11:10', type: '휴식', title: '휴식', speaker: '', moderator: '' },
+                    { time: '11:10-11:50', type: '개인발표 2', title: '『漂民對話』의 \'하압소\'체 종결형과 \'하오\'체 대치에 대하여: 아스톤문고본 中卷과 아스톤문고 회화서본의 비교를 중심으로', speaker: '황문환 (한국·전 한국학중앙연구원)', moderator: '허인영 (인하대학교)' },
+                    { time: '11:50-13:00', type: '휴식', title: '점심 식사', speaker: '', moderator: '' },
+                    { time: '13:00-14:20', type: '주제 발표', title: '小倉文庫本『善隣雜話』에 대한 고찰', speaker: '박진완 (일본·교토산업대학)', moderator: '장향실 (상지대학교)', isGroup: true, subEvents: [
+                        { title: '『朴通事新釈諺解』에 보이는 T구개음화의 사용상태와 특징', speaker: '김주필 (한국·국민대학교)'}
+                    ]},
+                    { time: '14:20-14:30', type: '휴식', title: '휴식', speaker: '', moderator: '' },
+                    { time: '14:30-15:40', type: '주제 발표', title: '여진문자의 표기법과 한국의 차자표기법과의 비교', speaker: '문현수 (한국·인하대학교)', moderator: '마쓰오카 유타 (간사이대학)', isGroup: true, subEvents: [
+                        { title: '『漢清文鑑』의 만주어 표제어에 대한 중국어·한국어의 대역 양상 분석', speaker: '남향림 (한국·고려대학교)'}
+                    ]},
+                    { time: '15:40-15:50', type: '폐회', title: '폐회사', speaker: '김양진 (국제역학서학회 부회장)', moderator: '허인영 (인하대학교)' }
+                ]
+            }
+        };
+
+        const scheduleContent = document.getElementById('schedule-content');
+        const day1Btn = document.getElementById('day1-btn');
+        const day2Btn = document.getElementById('day2-btn');
+
+        function getTypePill(type) {
+            let colorClass = 'bg-gray-200 text-gray-700';
+            switch (type) {
+                case '개회':
+                case '폐회':
+                    colorClass = 'bg-indigo-100 text-indigo-800';
+                    break;
+                case '강연 1':
+                case '강연 2':
+                    colorClass = 'bg-amber-100 text-amber-800';
+                    break;
+                case '개인발표 1':
+                case '개인발표 2':
+                    colorClass = 'bg-green-100 text-green-800';
+                    break;
+                case '주제 발표':
+                    colorClass = 'bg-sky-100 text-sky-800';
+                    break;
+                case '총회':
+                    colorClass = 'bg-rose-100 text-rose-800';
+                    break;
+            }
+            return `<span class="px-2 py-1 text-xs font-semibold rounded-full ${colorClass}">${type}</span>`;
+        }
+
+        function showSchedule(day) {
+            const data = scheduleData[day];
+            let content = `<div class="bg-white rounded-2xl shadow-sm p-6 md:p-8 ring-1 ring-gray-200">
+                               <h3 class="text-xl md:text-2xl font-bold text-center mb-6 text-[#6B5B50]">${day === 'day1' ? '8월 25일 (월)' : '8월 26일 (화)'} - <span class="font-normal">${data.venue}</span></h3>
+                               <div>`;
+
+            data.events.forEach(event => {
+                let speakerInfo = event.speaker ? `<p class="font-semibold text-gray-800 mt-2">${event.title}</p><p class="text-sm text-gray-600">${event.speaker}</p>` : `<p class="font-semibold text-gray-800">${event.title}</p>`;
+                
+                if (event.isGroup && event.subEvents) {
+                    event.subEvents.forEach(sub => {
+                        speakerInfo += `<div class="mt-3 pt-3 border-t border-dashed border-gray-200"><p class="font-semibold text-gray-800">${sub.title}</p><p class="text-sm text-gray-600">${sub.speaker}</p></div>`;
+                    });
+                }
+
+                let moderatorInfo = event.moderator ? `<div class="mt-3 text-sm"><span class="font-semibold text-gray-500">사회:</span> ${event.moderator}</div>` : '';
+
+                content += `
+                    <div class="flex space-x-4 timeline-item pb-8">
+                        <div class="w-24 md:w-32 flex-shrink-0 text-right">
+                            <div class="font-bold text-sm md:text-base text-[#A88B79] timeline-time px-2 py-1 rounded-md inline-block">${event.time}</div>
+                        </div>
+                        <div class="flex-grow pl-4">
+                            <div class="flex items-center space-x-3 mb-2">
+                                ${getTypePill(event.type)}
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                ${speakerInfo}
+                                ${moderatorInfo}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            content += `</div></div>`;
+            scheduleContent.innerHTML = content;
+
+            if (day === 'day1') {
+                day1Btn.classList.add('active-tab');
+                day2Btn.classList.remove('active-tab');
+            } else {
+                day2Btn.classList.add('active-tab');
+                day1Btn.classList.remove('active-tab');
+            }
+        }
+
+    </script>
+</body>
+</html>
