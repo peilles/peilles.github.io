@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>제16회 국제역학서학회 국제학술회의</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -54,89 +53,140 @@
     <div class="container mx-auto px-4 py-8 md:py-12">
 
         <header class="text-center mb-10 md:mb-12">
-            <h1 class="text-3xl md:text-5xl font-bold text-[#6B5B50] mb-2">제16회 국제역학서학회 국제학술회의</h1>
+            <h1 class="text-3xl md:text-5xl font-bold text-[#6B5B50] mb-2">제16회 국제역학서학회 국제학술회의<br/>The 16th Conference of the ASPMT</h1>
+            <p class="text-lg md:text-xl text-gray-600">주최: 국제역학서학회, 고려대학교 민족문화연구원<br/>Hosted by: Association for the Study of Premodern Multilingual Textbooks, Research Institute of Korean Studies, Korea University</p>
         </header>
 
         <main>
-            <section id="info" class="bg-white rounded-2xl shadow-sm p-6 md:p-8 mb-8 ring-1 ring-gray-200">
-                <div class="grid md:grid-cols-2 gap-6 text-center md:text-left">
-                    <div class="border-b md:border-b-0 md:border-r pb-6 md:pb-0 md:pr-6 border-gray-200">
-                        <h2 class="text-sm font-semibold uppercase text-[#A88B79] mb-2">일정</h2>
-                        <p class="text-lg font-medium text-gray-800">2025년 8월 25일(월) - 26일(화)</p>
-                    </div>
-                    <div>
-                        <h2 class="text-sm font-semibold uppercase text-[#A88B79] mb-2">장소</h2>
-                        <p class="text-lg font-medium text-gray-800">고려대학교 민족문화연구원 대강당 & 지훈회의실</p>
-                    </div>
+            <div class="flex justify-center mb-8">
+                <div class="bg-white rounded-full shadow-inner p-1 flex space-x-1">
+                    <button id="poster-btn" class="tab-btn px-6 py-2 text-sm md:text-base font-semibold rounded-full transition-all duration-300 ease-in-out" onclick="showView('poster')">포스터<br/>Poster</button>
+                    <a href="https://forms.gle/wdnufCadzZutFZxi9" target="_blank">
+                        <button class="tab-btn px-6 py-2 text-sm md:text-base font-semibold rounded-full transition-all duration-300 ease-in-out flex items-center space-x-2">
+                            <span>참가 신청<br/>Register</span>
+                            <span>&#x1F517;</span>
+                        </button>
+                    </a>
+                    <button id="access-btn" class="tab-btn px-6 py-2 text-sm md:text-base font-semibold rounded-full transition-all duration-300 ease-in-out" onclick="showView('access')">오시는 길<br/>Access</button>
+                    <button id="day1-btn" class="tab-btn px-6 py-2 text-sm md:text-base font-semibold rounded-full transition-all duration-300 ease-in-out" onclick="showView('day1')">8월 25일 (월)<br/>August 25 (Mon)</button>
+                    <button id="day2-btn" class="tab-btn px-6 py-2 text-sm md:text-base font-semibold rounded-full transition-all duration-300 ease-in-out" onclick="showView('day2')">8월 26일 (화)<br/>August 26 (Tue)</button>
                 </div>
-            </section>
+            </div>
 
-            <section id="schedule">
-                <div class="flex justify-center mb-8">
-                    <div class="bg-white rounded-full shadow-inner p-1 flex space-x-1">
-                        <button id="day1-btn" class="tab-btn px-6 py-2 text-sm md:text-base font-semibold rounded-full transition-all duration-300 ease-in-out" onclick="showSchedule('day1')">8월 25일 (월)</button>
-                        <button id="day2-btn" class="tab-btn px-6 py-2 text-sm md:text-base font-semibold rounded-full transition-all duration-300 ease-in-out" onclick="showSchedule('day2')">8월 26일 (화)</button>
+            <div id="dynamic-content">
+                <section id="poster-section" class="mb-10" style="display: none;">
+                    <img src="./ASPMT-16th.jpg" alt="Poster" class="w-full h-auto rounded-lg shadow-lg">
+                </section>
+                
+                <section id="access-section" class="mb-10" style="display: none;">
+                    <div class="bg-white rounded-2xl shadow-sm p-6 md:p-8 mb-8 ring-1 ring-gray-200">
+                        <h2 class="text-xl md:text-2xl font-bold text-center mb-6 text-[#6B5B50]">오시는 길 / Access</h2>
+                        <p class="mb-4">학술회의가 열리는 고려대학교 민족문화연구원에 오시는 길은 아래 링크를 참고하시기 바랍니다.<br/>Please refer to the link below for directions to the Research Institute of Korean Studies at Korea University, where the conference will be held.</p>
+                        <a href="https://riks.korea.ac.kr/about/contact" target="_blank" class="text-blue-600 hover:underline mb-6 block">https://riks.korea.ac.kr/about/contact</a>
+                        
+                        <h3 class="text-lg font-bold mt-6 mb-2">인천/김포국제공항에서 오시는 길<br/>Directions from Incheon/Gimpo International Airport</h3>
+                        <p class="mb-4">외국에서 오시는 분들은 인천 또는 김포국제공항에서 지하철, 리무진버스 등을 이용하실 수 있습니다.<br/>For international participants, you can use the subway or limousine bus from Incheon or Gimpo International Airport.</p>
+                        
+                        <div class="mb-4 p-4 bg-gray-50 rounded-lg">
+                            <h4 class="font-semibold text-gray-800">지하철 / Subway</h4>
+                            <p class="mt-2">인천 또는 김포국제공항(공항철도) -> 공덕역(6호선 환승) -> 고려대역 -> 3번 출구에서 성북20번 마을버스 탑승 -> '고려대 아이스링크' 정류장에서 하차<br/>Incheon or Gimpo Int'l Airport (Airport Railroad) -> Gongdeok Station (Transfer to Line 6) -> Korea University Station -> Take Seongbuk 20 village bus from Exit 3 -> Get off at 'Korea University Ice Rink' stop</p>
+                        </div>
+                        
+                        <div class="mb-4 p-4 bg-gray-50 rounded-lg">
+                            <h4 class="font-semibold text-gray-800">리무진버스 / Limousine Bus</h4>
+                            <p class="mt-2">6101번(김포국제공항 경유) 또는 6102번 -> '고려대역· 숭례초교' 정류장에서 하차<br/>Take bus 6101 (via Gimpo Int'l Airport) or 6102 -> Get off at 'Korea University Station · Sungrye Elementary School' stop</p>
+                            <a href="https://www.calt.co.kr/m/limousine/02.php" target="_blank" class="text-blue-600 hover:underline mt-2 inline-block">https://www.calt.co.kr/m/limousine/02.php</a>
+                        </div>
                     </div>
-                </div>
+                </section>
 
-                <div id="schedule-content"></div>
-            </section>
+                <section id="schedule-day1" style="display: none;">
+                    <div id="info-day1" class="bg-white rounded-2xl shadow-sm p-6 md:p-8 mb-8 ring-1 ring-gray-200">
+                        <div class="grid md:grid-cols-2 gap-6 text-center md:text-left">
+                            <div class="border-b md:border-b-0 md:border-r pb-6 md:pb-0 md:pr-6 border-gray-200">
+                                <h2 class="text-sm font-semibold uppercase text-[#A88B79] mb-2">일정 / Date</h2>
+                                <p class="text-lg font-medium text-gray-800">2025년 8월 25일(월) - 26일(화)<br/>August 25 (Mon) and 26 (Tue), 2025</p>
+                            </div>
+                            <div>
+                                <h2 class="text-sm font-semibold uppercase text-[#A88B79] mb-2">장소 / Venue</h2>
+                                <p class="text-lg font-medium text-gray-800">고려대학교 민족문화연구원<br/>Research Institute of Korean Studies, Korea University</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="schedule-content-day1"></div>
+                </section>
+
+                <section id="schedule-day2" style="display: none;">
+                    <div id="info-day2" class="bg-white rounded-2xl shadow-sm p-6 md:p-8 mb-8 ring-1 ring-gray-200">
+                        <div class="grid md:grid-cols-2 gap-6 text-center md:text-left">
+                            <div class="border-b md:border-b-0 md:border-r pb-6 md:pb-0 md:pr-6 border-gray-200">
+                                <h2 class="text-sm font-semibold uppercase text-[#A88B79] mb-2">일정 / Date</h2>
+                                <p class="text-lg font-medium text-gray-800">2025년 8월 25일(월) - 26일(화)<br/>August 25 (Mon) and 26 (Tue), 2025</p>
+                            </div>
+                            <div>
+                                <h2 class="text-sm font-semibold uppercase text-[#A88B79] mb-2">장소 / Venue</h2>
+                                <p class="text-lg font-medium text-gray-800">고려대학교 민족문화연구원<br/>Research Institute of Korean Studies, Korea University</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="schedule-content-day2"></div>
+                </section>
+            </div>
         </main>
 
         <footer class="text-center mt-12">
-            <p class="text-sm text-gray-500">&copy; 2025 국제역학서학회 사무국</p>
+            <p class="text-sm text-gray-500">&copy; 2025 Association for the Study of Premodern Multilingual Textbooks</p>
         </footer>
     </div>
 
     <script>
         const scheduleData = {
             day1: {
-                venue: '대강당',
+                venue: '대강당 / Auditorium',
                 events: [
-                    { time: '09:50-10:00', type: '개회', title: '개회사', speaker: '다케코시 다카시 (국제역학서학회장)', moderator: '허인영 (한국·인하대학교)' },
-                    { time: '10:00-12:10', type: '강연 1', title: '근대 조선본 수집가와 어학서', speaker: '후지모토 유키오 (일본·전 도야마대학)', moderator: '정승혜 (한국·수원여자대학교)', isGroup: true, subEvents: [
-                        { title: '임진왜란의 피로인, 李宗閑에 대하여', speaker: '김문경 (일본·전 교토대학)'}
+                    { time: '09:50-10:00', type: '개회 / Opening', title: '축사 / Congratulatory Speech', speaker: '허은 / HEO Eun (고려대학교 민족문화연구원장 / Director, Research Institute of Korean Studies, Korea University)', moderator: '허인영 / HEO Inyeong (한국·인하대학교 / Inha University, Korea)', isGroup: true, subEvents: [
+                        { title: '개회사 / Opening Address', speaker: '다케코시 다카시 / TAKEKOSHI Takashi (국제역학서학회장 / President, Association for the Study of Premodern Multilingual Textbooks)'}
                     ]},
-                    { time: '12:10-13:30', type: '휴식', title: '점심 식사', speaker: '', moderator: '' },
-                    { time: '13:30-14:50', type: '개인발표 1', title: '『満漢類書』에 나타난 관직명에 대하여', speaker: '스키타 도모히코 (일본·이와테대학)', moderator: '김양진 (한국·경희대학교)', isGroup: true, subEvents: [
-                        { title: '『日満語類集語彙』의 수록 어휘에 대하여', speaker: '마쓰오카 유타 (일본·간사이대학)'}
+                    { time: '10:00-12:10', type: '강연 1 / Lecture 1', title: '근대 조선본 수집가와 어학서 / Collectors of Korean Books and Language Textbooks in the Modern Era', speaker: '후지모토 유키오 / FUJIMOTO Yukio (일본·前 도야마대학 / Toyama University, Japan)', moderator: '정승혜 / CHUNG Seunghye (한국·수원여자대학교 / Suwon Women\'s University, Korea)', isGroup: true, subEvents: [
+                        { title: '임진왜란의 피로인, 李宗閑에 대하여 / On Lee Jong-han, a Prisoner of the Japanese Invasion of Korea in 1592', speaker: '김문경 / KIN Bunkyo (일본·前 교토대학 / Kyoto University, Japan)'}
                     ]},
-                    { time: '14:50-15:00', type: '휴식', title: '휴식', speaker: '', moderator: '' },
-                    { time: '15:00-16:20', type: '주제 발표', title: '청나라 시기 중국과 조선의 문학 교류', speaker: '우거페이 (중국·중국광업대학)', moderator: '스기야마 유타카 (교토산업대학)', isGroup: true, subEvents: [
-                        { title: '『一百条』(Tanggu Meyen)계 제본의 계승과 변용', speaker: '다케코시 다카시 (일본·고베시외국어대학)'}
+                    { time: '12:10-13:30', type: '휴식 / Break', title: '점심 식사 / Lunch', speaker: '', moderator: '' },
+                    { time: '13:30-14:50', type: '개인발표 / Individual Presentation', title: '『満漢類書』에 나타난 관직명에 대하여 / On Official Titles in “Man-Han Leishu”', speaker: '스키타 도모히코 / SUKITA Tomohiko (일본·이와테대학 / Iwate University, Japan)', moderator: '김양진 / KIM Ryangjin (한국·경희대학교 / Kyung Hee University, Korea)', isGroup: true, subEvents: [
+                        { title: '『日満語類集語彙』의 수록 어휘에 대하여 / On Vocabulary in “Nichimango Ruishu Goi”', speaker: '마쓰오카 유타 / MATSUOKA Yuta (일본·간사이대학 / Kansai University, Japan)'}
                     ]},
-                    { time: '16:20-16:30', type: '휴식', title: '휴식', speaker: '', moderator: '' },
-                    { time: '16:30-17:10', type: '주제 발표', title: '만주어의 형태론적 연구', speaker: '김양진 (한국·경희대학교)', moderator: '박진완 (교토산업대학)' },
-                    { time: '17:10-17:30', type: '총회', title: '총회', speaker: '', moderator: '허인영 (인하대학교)' },
-                    { time: '18:00-19:30', type: '네트워킹', title: '저녁 식사', speaker: '', moderator: '' }
+                    { time: '14:50-15:00', type: '휴식 / Break', title: '휴식 / Break', speaker: '', moderator: '' },
+                    { time: '15:00-16:20', type: '개인발표 / Individual Presentation', title: '청나라 시기 중국과 조선의 문학 교류 / Literary Exchange between China and Korea during the Qing Dynasty', speaker: '우거페이 / WU Gefei (중국·중국광업대학 / China University of Mining and Technology, China)', moderator: '스기야마 유타카 / SUGIYAMA Yutaka (일본·교토산업대학 / Kyoto Sangyo University, Japan)', isGroup: true, subEvents: [
+                        { title: '『一百条』(Tanggu Meyen)계 제본의 계승과 변용 / Inheritance and Transformation of “Yibaotiao” (Tanggu Meyen) Manuscripts', speaker: '다케코시 다카시 / TAKEKOSHI Takashi (일본·고베시외국어대학 / Kobe City University of Foreign Studies, Japan)'}
+                    ]},
+                    { time: '16:20-16:30', type: '휴식 / Break', title: '휴식 / Break', speaker: '', moderator: '' },
+                    { time: '16:30-17:10', type: '개인발표 / Individual Presentation', title: '만주어의 형태론적 연구 / A Morphological Study of the Manchu Language', speaker: '김양진 / KIM Ryangjin (한국·경희대학교 / Kyung Hee University, Korea)', moderator: '박진완 / PARK Jinwan (일본·교토산업대학 / Kyoto Sangyo University, Japan)' },
+                    { time: '17:10-17:30', type: '총회 / General Assembly', title: '총회 / General Assembly', speaker: '', moderator: '허인영 / HEO Inyeong (한국·인하대학교 / Inha University, Korea)' },
+                    { time: '18:00-19:30', type: '네트워킹 / Networking', title: '저녁 식사 / Dinner', speaker: '', moderator: '' }
                 ]
             },
             day2: {
-                venue: '지훈회의실',
+                venue: '지훈회의실 / Jihun Conference Room',
                 events: [
-                    { time: '10:00-11:00', type: '강연 2', title: '漢兒言語와 漢吏文: 조선 이문의 형성과정을 중심으로', speaker: '정광 (한국·전 고려대학교)', moderator: '다케코시 다카시 (고베시외국어대학)' },
-                    { time: '11:00-11:10', type: '휴식', title: '휴식', speaker: '', moderator: '' },
-                    { time: '11:10-11:50', type: '개인발표 2', title: '『漂民對話』의 \'하압소\'체 종결형과 \'하오\'체 대치에 대하여: 아스톤문고본 中卷과 아스톤문고 회화서본의 비교를 중심으로', speaker: '황문환 (한국·전 한국학중앙연구원)', moderator: '허인영 (인하대학교)' },
-                    { time: '11:50-13:00', type: '휴식', title: '점심 식사', speaker: '', moderator: '' },
-                    { time: '13:00-14:20', type: '주제 발표', title: '小倉文庫本『善隣雜話』에 대한 고찰', speaker: '박진완 (일본·교토산업대학)', moderator: '장향실 (상지대학교)', isGroup: true, subEvents: [
-                        { title: '『朴通事新釈諺解』에 보이는 T구개음화의 사용상태와 특징', speaker: '김주필 (한국·국민대학교)'}
+                    { time: '10:00-11:00', type: '강연 2 / Lecture 2', title: '漢兒言語와 漢吏文: 조선 이문의 형성과정을 중심으로 / Han\'er Yan\'yu and Han Rimun: Focusing on the Formation Process of Joseon Official Scripts', speaker: '정광 / CHUNG Kwang (한국·前 고려대학교 / Korea University, Korea)', moderator: '다케코시 다카시 / TAKEKOSHI Takashi (일본·고베시외국어대학 / Kobe City University of Foreign Studies, Japan)' },
+                    { time: '11:00-11:10', type: '휴식 / Break', title: '휴식 / Break', speaker: '', moderator: '' },
+                    { time: '11:10-11:50', type: '개인발표 / Individual Presentation', title: '『漂民對話』의 \'하압소\'체 종결형과 \'하오\'체 대치에 대하여 / On the Replacement of the \'Haapso\' Ending Form and \'Hao\' Form in “Hyomin Taiwa”', speaker: '황문환 / HWANG Munhwan (한국·前 한국학중앙연구원 / Academy of Korean Studies, Korea)', moderator: '허인영 / HEO Inyeong (인하대학교 / Inha University, Korea)' },
+                    { time: '11:50-13:00', type: '휴식 / Break', title: '점심 식사 / Lunch', speaker: '', moderator: '' },
+                    { time: '13:00-14:20', type: '개인발표 / Individual Presentation', title: '小倉文庫本『善隣雜話』에 대한 고찰 / A Study of “Zenrin Zatsuhwa” in the Ogura Collection', speaker: '박진완 / PARK Jinwan (일본·교토산업대학 / Kyoto Sangyo University, Japan)', moderator: '장향실 / CHANG Hyangsil (한국·상지대학교 / Sangji University, Korea)', isGroup: true, subEvents: [
+                        { title: '『朴通事新釈諺解』에 보이는 T구개음화의 사용상태와 특징 / Usage and Characteristics of T-palatalization in “Paktongsa Sinseok Eonhae”', speaker: '김주필 / KIM Joophil (한국·국민대학교 / Kookmin University, Korea)'}
                     ]},
-                    { time: '14:20-14:30', type: '휴식', title: '휴식', speaker: '', moderator: '' },
-                    { time: '14:30-15:40', type: '주제 발표', title: '여진문자의 표기법과 한국의 차자표기법과의 비교', speaker: '문현수 (한국·인하대학교)', moderator: '마쓰오카 유타 (간사이대학)', isGroup: true, subEvents: [
-                        { title: '『漢清文鑑』의 만주어 표제어에 대한 중국어·한국어의 대역 양상 분석', speaker: '남향림 (한국·고려대학교)'}
+                    { time: '14:20-14:30', type: '휴식 / Break', title: '휴식 / Break', speaker: '', moderator: '' },
+                    { time: '14:30-15:40', type: '개인발표 / Individual Presentation', title: '여진문자의 표기법과 한국의 차자표기법과의 비교 / Comparison of Jurchen Orthography and Korean Character Borrowing Methods', speaker: '문현수 / MOON Hyunsoo (한국·인하대학교 / Inha University, Korea)', moderator: '마쓰오카 유타 / MATSUOKA Yuta (일본·간사이대학 / Kansai University, Japan)', isGroup: true, subEvents: [
+                        { title: '『漢清文鑑』의 만주어 표제어에 대한 중국어·한국어의 대역 양상 분석 / Analysis of Chinese and Korean Translation Patterns for Manchu Headwords in “Han-Qing Wenjian”', speaker: '남향림 / NAN Xianglin (한국·고려대학교 / Korea University, Korea)'}
                     ]},
-                    { time: '15:40-15:50', type: '폐회', title: '폐회사', speaker: '김양진 (국제역학서학회 부회장)', moderator: '허인영 (인하대학교)' }
+                    { time: '15:40-15:50', type: '폐회 / Closing', title: '폐회사 / Closing Address', speaker: '김양진 / KIM Ryangjin (국제역학서학회 부회장 / Vice President, Association for the Study of Premodern Multilingual Textbooks)', moderator: '허인영 / HEO Inyeong (한국·인하대학교 / Inha University, Korea)' }
                 ]
             }
         };
 
-        const scheduleContent = document.getElementById('schedule-content');
-        const day1Btn = document.getElementById('day1-btn');
-        const day2Btn = document.getElementById('day2-btn');
-
         function getTypePill(type) {
             let colorClass = 'bg-gray-200 text-gray-700';
-            switch (type) {
+            const [koreanType] = type.split(' / ');
+            switch (koreanType.trim()) {
                 case '개회':
                 case '폐회':
                     colorClass = 'bg-indigo-100 text-indigo-800';
@@ -145,25 +195,40 @@
                 case '강연 2':
                     colorClass = 'bg-amber-100 text-amber-800';
                     break;
-                case '개인발표 1':
-                case '개인발표 2':
+                case '개인발표':
                     colorClass = 'bg-green-100 text-green-800';
-                    break;
-                case '주제 발표':
-                    colorClass = 'bg-sky-100 text-sky-800';
                     break;
                 case '총회':
                     colorClass = 'bg-rose-100 text-rose-800';
+                    break;
+                case '네트워킹':
+                case '휴식':
+                    colorClass = 'bg-gray-300 text-gray-800';
                     break;
             }
             return `<span class="px-2 py-1 text-xs font-semibold rounded-full ${colorClass}">${type}</span>`;
         }
 
-        function showSchedule(day) {
+        function populateSchedule(day) {
             const data = scheduleData[day];
-            let content = `<div class="bg-white rounded-2xl shadow-sm p-6 md:p-8 ring-1 ring-gray-200">
-                               <h3 class="text-xl md:text-2xl font-bold text-center mb-6 text-[#6B5B50]">${day === 'day1' ? '8월 25일 (월)' : '8월 26일 (화)'} - <span class="font-normal">${data.venue}</span></h3>
-                               <div>`;
+            const dynamicContent = document.getElementById('dynamic-content');
+
+            let content = `<section id="schedule-${day}" class="mb-10">
+                <div id="info-${day}" class="bg-white rounded-2xl shadow-sm p-6 md:p-8 mb-8 ring-1 ring-gray-200">
+                    <div class="grid md:grid-cols-2 gap-6 text-center md:text-left">
+                        <div class="border-b md:border-b-0 md:border-r pb-6 md:pb-0 md:pr-6 border-gray-200">
+                            <h2 class="text-sm font-semibold uppercase text-[#A88B79] mb-2">일정 / Date</h2>
+                            <p class="text-lg font-medium text-gray-800">2025년 8월 25일(월) - 26일(화)<br/>August 25 (Mon) and 26 (Tue), 2025</p>
+                        </div>
+                        <div>
+                            <h2 class="text-sm font-semibold uppercase text-[#A88B79] mb-2">장소 / Venue</h2>
+                            <p class="text-lg font-medium text-gray-800">고려대학교 민족문화연구원<br/>Research Institute of Korean Studies, Korea University</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl shadow-sm p-6 md:p-8 ring-1 ring-gray-200">
+                    <h3 class="text-xl md:text-2xl font-bold text-center mb-6 text-[#6B5B50]">${day === 'day1' ? '8월 25일 (월) / August 25 (Mon)' : '8월 26일 (화) / August 26 (Tue)'} - <span class="font-normal">${data.venue}</span></h3>
+                    <div>`;
 
             data.events.forEach(event => {
                 let speakerInfo = event.speaker ? `<p class="font-semibold text-gray-800 mt-2">${event.title}</p><p class="text-sm text-gray-600">${event.speaker}</p>` : `<p class="font-semibold text-gray-800">${event.title}</p>`;
@@ -174,7 +239,7 @@
                     });
                 }
 
-                let moderatorInfo = event.moderator ? `<div class="mt-3 text-sm"><span class="font-semibold text-gray-500">사회:</span> ${event.moderator}</div>` : '';
+                let moderatorInfo = event.moderator ? `<div class="mt-3 text-sm"><span class="font-semibold text-gray-500">사회 / Moderator:</span> ${event.moderator}</div>` : '';
 
                 content += `
                     <div class="flex space-x-4 timeline-item pb-8">
@@ -194,18 +259,54 @@
                 `;
             });
 
-            content += `</div></div>`;
-            scheduleContent.innerHTML = content;
+            content += `</div></div></section>`;
+            dynamicContent.innerHTML = content;
+        }
 
-            if (day === 'day1') {
-                day1Btn.classList.add('active-tab');
-                day2Btn.classList.remove('active-tab');
-            } else {
-                day2Btn.classList.add('active-tab');
-                day1Btn.classList.remove('active-tab');
+        function showView(viewId) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active-tab'));
+            const dynamicContent = document.getElementById('dynamic-content');
+
+            if (viewId === 'poster') {
+                dynamicContent.innerHTML = `<section id="poster-section" class="mb-10">
+                    <img src="./ASPMT-16th.jpg" alt="제16회 국제역학서학회 포스터" class="w-full h-auto rounded-lg shadow-lg">
+                </section>`;
+                document.getElementById('poster-btn').classList.add('active-tab');
+            } else if (viewId === 'access') {
+                dynamicContent.innerHTML = `<section id="access-section" class="mb-10">
+                    <div class="bg-white rounded-2xl shadow-sm p-6 md:p-8 mb-8 ring-1 ring-gray-200">
+                        <h2 class="text-xl md:text-2xl font-bold text-center mb-6 text-[#6B5B50]">오시는 길 / Access</h2>
+                        <p class="mb-4">학술회의가 열리는 고려대학교 민족문화연구원에 오시는 길은 아래 링크를 참고하시기 바랍니다.<br/>Please refer to the link below for directions to the Research Institute of Korean Studies at Korea University, where the conference will be held.</p>
+                        <a href="https://riks.korea.ac.kr/about/contact" target="_blank" class="text-blue-600 hover:underline mb-6 block">https://riks.korea.ac.kr/about/contact</a>
+                        
+                        <h3 class="text-lg font-bold mt-6 mb-2">인천/김포국제공항에서 오시는 길<br/>Directions from Incheon/Gimpo International Airport</h3>
+                        <p class="mb-4">외국에서 오시는 분들은 인천 또는 김포국제공항에서 지하철, 리무진버스 등을 이용하실 수 있습니다.<br/>For international participants, you can use the subway or limousine bus from Incheon or Gimpo International Airport.</p>
+                        
+                        <div class="mb-4 p-4 bg-gray-50 rounded-lg">
+                            <h4 class="font-semibold text-gray-800">지하철 / Subway</h4>
+                            <p class="mt-2">인천 또는 김포국제공항(공항철도) -> 공덕역(6호선 환승) -> 고려대역 -> 3번 출구에서 성북20번 마을버스 탑승 -> '고려대 아이스링크' 정류장에서 하차<br/>Incheon or Gimpo Int'l Airport (Airport Railroad) -> Gongdeok Station (Transfer to Line 6) -> Korea University Station -> Take Seongbuk 20 village bus from Exit 3 -> Get off at 'Korea University Ice Rink' stop</p>
+                        </div>
+                        
+                        <div class="mb-4 p-4 bg-gray-50 rounded-lg">
+                            <h4 class="font-semibold text-gray-800">리무진버스 / Limousine Bus</h4>
+                            <p class="mt-2">6101번(김포국제공항 경유) 또는 6102번 -> '고려대역· 숭례초교' 정류장에서 하차<br/>Take bus 6101 (via Gimpo Int'l Airport) or 6102 -> Get off at 'Korea University Station · Sungrye Elementary School' stop</p>
+                            <a href="https://www.calt.co.kr/m/limousine/02.php" target="_blank" class="text-blue-600 hover:underline mt-2 inline-block">https://www.calt.co.kr/m/limousine/02.php</a>
+                        </div>
+                    </div>
+                </section>`;
+                document.getElementById('access-btn').classList.add('active-tab');
+            } else if (viewId === 'day1') {
+                populateSchedule('day1');
+                document.getElementById('day1-btn').classList.add('active-tab');
+            } else if (viewId === 'day2') {
+                populateSchedule('day2');
+                document.getElementById('day2-btn').classList.add('active-tab');
             }
         }
 
+        document.addEventListener('DOMContentLoaded', () => {
+            showView('poster');
+        });
     </script>
 </body>
 </html>
