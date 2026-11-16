@@ -2,3 +2,55 @@
 ---
 
 @import "jekyll-theme-minimal";
+
+body {
+  font-family: "Noto Sans", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+  font-size: 15px;
+  line-height: 1.75;
+  word-break: keep-all;
+}
+
+.post-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.post-list li {
+  padding: 18px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.post-list li:first-child { padding-top: 0; }
+
+.post-list a {
+  font-size: 18px;
+  font-weight: 700;
+  color: #222;
+}
+
+.post-list a:hover { color: #069; }
+
+.post-date {
+  display: block;
+  font-size: 13px;
+  color: #999;
+  margin: 0 0 4px;
+}
+
+.post-excerpt {
+  margin: 6px 0 0;
+  color: #727272;
+}
+
+.post h1 { margin-bottom: 28px; }
+
+.post-tags span {
+  font-size: 13px;
+  color: #999;
+}
+
+.post-back {
+  margin-top: 40px;
+  font-size: 14px;
+}
