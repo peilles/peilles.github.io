@@ -18,6 +18,23 @@
         
         <p>{{ site.description | default: site.github.project_tagline }}</p>
 
+        <nav class="site-nav">
+          <ul>
+            {% for item in site.nav %}
+            {% assign item_url = item.url | relative_url %}
+            {% assign here = page.url | relative_url | replace: "index.html", "" %}
+            <li><a href="{{ item_url }}"{% if here == item_url or page.layout == "post" and item.url == "/blog.html" %} class="current"{% endif %}>{{ item.title }}</a></li>
+            {% endfor %}
+          </ul>
+        </nav>
+
+        {% if site.email or site.scholar %}
+        <p class="contact">
+          {% if site.email %}<a href="mailto:{{ site.email }}">{{ site.email }}</a><br>{% endif %}
+          {% if site.scholar %}<a href="{{ site.scholar }}">Google Scholar</a>{% endif %}
+        </p>
+        {% endif %}
+
         {% if site.github.is_project_page %}
         <p class="view"><a href="{{ site.github.repository_url }}">View the Project on GitHub <small>{{ site.github.repository_nwo }}</small></a></p>
         {% endif %}

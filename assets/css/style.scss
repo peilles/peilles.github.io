@@ -54,3 +54,64 @@ body {
   margin-top: 40px;
   font-size: 14px;
 }
+
+/* ---- navigation ---- */
+.site-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+}
+.site-nav li { margin: 0 0 6px; }
+.site-nav a {
+  color: #555;
+  font-size: 15px;
+}
+.site-nav a:hover { color: #069; text-decoration: none; }
+.site-nav a.current {
+  color: #222;
+  font-weight: 700;
+}
+.contact { font-size: 13px; }
+
+/* ---- entry lists (education, talks, CV) ---- */
+dl.entries {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  column-gap: 16px;
+  row-gap: 14px;
+  margin: 0 0 32px;
+}
+dl.entries dt {
+  font-weight: 400;
+  color: #999;
+  font-size: 14px;
+  margin: 0;
+}
+dl.entries dd { margin: 0; }
+.note { color: #999; font-size: 14px; }
+
+ol.pubs { padding-left: 22px; margin: 0 0 32px; }
+ol.pubs li { margin: 0 0 12px; padding-left: 4px; }
+
+section h2 {
+  font-size: 18px;
+  margin-top: 36px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #eee;
+}
+
+a.button {
+  display: inline-block;
+  padding: 6px 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: #222;
+  font-size: 14px;
+}
+a.button:hover { border-color: #069; color: #069; text-decoration: none; }
+
+@media print, screen and (max-width: 720px) {
+  .site-nav li { display: inline-block; margin: 0 14px 6px 0; }
+  dl.entries { grid-template-columns: 1fr; row-gap: 2px; }
+  dl.entries dd { margin-bottom: 12px; }
+}

@@ -1,7 +1,26 @@
 title: peilles
-description: 말과 언어에 대해 생각한 것들을 적어 두는 곳.
+description: Linguist
 lang: ko
 show_downloads: false
 google_analytics:
 theme: jekyll-theme-minimal
 timezone: Asia/Seoul
+
+# 왼쪽 메뉴. 순서를 바꾸거나 줄을 지우면 메뉴도 그대로 바뀝니다.
+nav:
+  - title: About
+    url: /
+  - title: Publications
+    url: /publications.html
+  - title: Talks
+    url: /talks.html
+  - title: Teaching
+    url: /teaching.html
+  - title: CV
+    url: /cv.html
+  - title: Blog
+    url: /blog.html
+
+# 이메일·학교 페이지 등 (비워 두면 표시되지 않습니다)
+email:
+scholar:
